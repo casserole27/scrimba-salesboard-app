@@ -2,25 +2,124 @@
 <html lang="en">
     <!-- 
     Author: Cassie Lewis https://github.com/casserole27 Date: April 2023 
- -->
+    -->
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title></title>
+    <title>Salesboard</title>
 
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <!--GOOGLE FONTS, added Poppins 700-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
         
-        <link rel="stylesheet" href="styles.css">
+    <!--CSS STYLESHEET-->
+    <link rel="stylesheet" href="styles.css">
+
 </head>
 
 <body>
 
-    <div class="container">
-        <h1>Salesboard 🔔</h1>
+    <div class="body-container">
+
+        <header class="header-container">
+            
+            <h1>Salesboard 🔔</h1>
+        
+            <img src="images/dingrogu.png" alt="Din Grogu, aka Baby Yoda, on blue background">
+        
+        </header>
+
+        <main>
+
+            <section class="products-container">
+
+                <button 
+                    class="star-btn" 
+                    id="star-btn" 
+                    aria-label="add star product">
+                    ⭐
+                </button>
+                
+                <button 
+                    class="fire-btn" 
+                    id ="fire-btn" 
+                    aria-label="add fire product">
+                    🔥
+                </button>
+
+            </section>
+
+            <section>
+
+                <div class="sales-container">
+                
+                    <h2>Live Sales - </h2>
+                    <!--JS RENDERING START-->
+                    <p 
+                        class="sales-counter"
+                        id="sales-counter">
+                        12
+                    </p>
+                    
+                    <div 
+                        class="sales-emoji-container"
+                        id="sales-emoji-container">
+                    </div>
+                    <!--JS RENDERING END-->
+
+                </div>
+
+                <div class="achv-container">    
+                
+                    <h2>Live Achievements - </h2>
+                    <!--JS RENDERING START-->
+                    <p 
+                        class="achv-counter"
+                        id="achv-counter">
+                        2
+                    </p>
+                    
+                    <div 
+                        class="sales-emoji-container"
+                        id="sales-emoji-container">
+                    </div>
+                    <!--JS RENDERING END-->
+
+                </div>
+
+            </section>
+
+            <footer class="totals-container">
+
+                <div class="revenue-container">
+                
+                    <h2>Total Revenue</h2>
+                    <!--JS RENDERING-->
+                    <p 
+                        class="revenue"
+                        id="revenue">
+                        $2700
+                    </p>
+                
+                </div>
+
+                <div class="commission-container">
+                
+                    <h2>Total Commission</h2>
+                    <!--JS RENDERING-->
+                    <p 
+                        class="commission"
+                        id="commision">
+                        $675
+                    </p>
+                
+                </div>
+
+            </footer>
+        </main>
     </div>
 
     <script src="index.js"></script>
