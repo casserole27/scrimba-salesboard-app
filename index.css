@@ -11,7 +11,7 @@ COLOR: #9E4770
 /****** VARIABLES ******/
 
 :root {
-    
+
     /*COLORS*/
   
     
@@ -36,3 +36,132 @@ COLOR: #9E4770
 }
 
 /******* GLOBAL STYLES *******/
+body {
+    text-align: center;
+    max-width: 950px;
+    margin: 0 auto;
+    background: #201a23;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+}
+
+.body-container {
+    width: 90%;
+    margin: 10px auto 0 auto;
+}
+
+img {
+    width: 120px;
+    border: 4px solid #44354A;
+    border-radius: 50%;
+    margin-bottom: 15px;
+}
+
+main {
+    width: 100%;
+}
+
+.products-container {
+    margin-bottom: 20px;
+}
+
+button {
+    width: 80px;
+    height: 40px;
+    background: #9e4770;
+    border: none;
+    border-radius: 6px;
+    font-size: 20px;
+}
+
+.sales-container,
+.achv-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.sales-title-container,
+.achv-title-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+h2,
+p {
+    font-size: 20px;
+}
+
+p {
+    margin-left: 5px;
+}
+
+.emoji-container {
+    background: #44354a;
+    height: 45px;
+    width: 100%;
+    margin: 0 auto;
+    border-radius: 50px;
+}
+
+.totals-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+}
+
+.revenue-container,
+.commission-container {
+    width: 100%;
+}
+
+.revenue,
+.commission {
+    font-size: 40px;
+    background: #44354a;
+    border-radius: 50px;
+    width: 95%;
+}
+
+@media screen and (min-width: 420px) {
+    
+    button {
+        width: 100px;
+        height: 40px;
+        background: #9e4770;
+        border: none;
+        border-radius: 6px;
+        font-size: 20px;
+    }
+    
+    .totals-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        width: 100%;
+    }
+    
+    .revenue-container,
+    .commission-container {
+        width: 50%;
+    }
+    
+    .revenue,
+    .commission {
+        font-size: 40px;
+        background: #44354a;
+        border-radius: 50px;
+        width: 95%;
+    }
+    
+    .revenue {
+        margin-right: auto;
+    }
+    
+    .commission {
+        margin-left: auto;
+    }
+}
