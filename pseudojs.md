@@ -6,22 +6,22 @@ FROM PROJECT REQUIREMENTS:
     - objects
 
 TASK:
-Star emoji button / Fire emoji button
-- each add emoji to live sales
-- increment live sales counter
+- Star emoji button / Fire emoji button
+    - each add emoji to live sales
+    - increment live sales counter
 
 TASK:
-Achievements: count instances of star emoji and fire emoji
-- first sale adds bell emoji
-- $2500 or more adds a bag of money
-- 15th sale adds trophy
-- increment achievement counter
-STRETCH GOAL:
-- Add more achievements
+- Achievements: count instances of star emoji and fire emoji
+    - first sale adds bell emoji
+    - $2500 or more adds a bag of money
+    - 15th sale adds trophy
+    - increment achievement counter
+- STRETCH GOAL:
+    - Add more achievements
 
 TASK:
-Update total revenue $ amount
-Update total commission $ amount
+- Update total revenue $ amount
+- Update total commission $ amount
 
 
 FILE INFO:
