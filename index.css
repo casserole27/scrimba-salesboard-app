@@ -74,6 +74,23 @@ button {
     font-size: var(--fs-s);
 }
 
+button:hover {
+    transform: scale(1.1);
+    transition: all .5s ease;
+}
+
+/* putting focus state on button keeps style active if its clicked. */
+button:focus {
+    background: #662845;
+}
+
+button:active {
+    background: #662845;
+    width: 180px;
+    height: 70px;
+}
+
+
 .star-btn { 
     margin-right: .875rem;
 }
@@ -104,10 +121,12 @@ p {
 
 .emoji-container {
     background: #44354a;
-    height: 45px;
+    /* changed height to keep containers flexible to fit emojis */
+    height: 100%;
     width: 100%;
     margin: 0 auto;
     border-radius: 50px;
+    padding: .5rem 0;
 }
 
 .totals-container {
@@ -147,7 +166,6 @@ p {
         width: 188px; 
         height: 80px; 
         font-size: var(--fs-title); 
-
         margin-bottom: 1rem;
     }
     
