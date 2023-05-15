@@ -16,8 +16,6 @@ let productB = {
     commission: 75
 }
 
-const starBtn = document.getElementById("star-btn")
-const fireBtn = document.getElementById("fire-btn")
 const liveSalesCountHtml = document.getElementById("sales-counter")
 const salesEmojiContainer = document.getElementById("sales-emoji-container")
 const liveAchvCountHtml = document.getElementById("achv-counter")
@@ -29,67 +27,116 @@ let achvCounter = 0
 let revenueCounter = 0
 let commissionCounter = 0
 
+let salesArray = []
+let achieveArray = []
+
 /****** FUNCTIONS ******/
 
-// function to handle button click.
-
-// Any ideas how we can make this a little more DRY? It's not huge,
-// but it does repeat itself a bit.
+//Project requirement: use objects, using provided objects
+//My idea for dryer code: handle tasks in general render function
 function handleClick(e) {
     if (e.target.id === "star-btn") {
-        addSalesEmoji(productA)
-        addRev(productA.revenue)
-        addComm(productA.commission)
+        render(productA)
     } else if (e.target.id === "fire-btn") {
-        addSalesEmoji(productB)
-        addRev(productB.revenue)
-        addComm(productB.commission)
+        render(productB)
     }
+}      
 
+function render(prod) {
+    salesArray.push(prod.emoji)
+    renderSalesEmoji(salesArray)
+    renderMoneyStream(prod.revenue, prod.commission)
+    renderMoneyEmojis()
+    if (salesArray.length === 1) {
+       renderAchieveEmoji('🔔', achieveArray)
+    } else if (salesArray.length === 15) {
+        renderAchieveEmoji('🏆', achieveArray)
+    } else if (salesArray.length === 30) { //stretch goal: add new achievements
+        renderAchieveEmoji('🌠', achieveArray)
+    }
 }
 
-// function to add sales emojis, call achv func and increase sales counter. 
-function addSalesEmoji(obj) {
+//Project requirements: use functions, arrays, and loops
+
+function renderSalesEmoji(arr) {
+    let salesDisplay=''
+        for (let i = 0; i < arr.length; i++) {
+            salesDisplay = arr[i]
+        }
     salesCounter++
-    addAchvEmoji()
-    liveSalesCountHtml.textContent = salesCounter
-    salesEmojiContainer.innerHTML += obj.emoji
+    salesEmojiContainer.innerHTML += salesDisplay
+    liveSalesCountHtml.innerText = salesCounter
 }
 
-
-// function to add achievements if requirements met.
-// I think we could make this a bit more consise, any ideas?
-function addAchvEmoji() {
-    // didn't add medal emojis yet for achievements yet, just console.log
-    if(salesCounter === 1) {
-        achvCounter++
-        console.log("first sale")
-        liveAchvCountHtml.textContent = achvCounter
-    } else if (salesCounter === 15) {
-        achvCounter++
-        liveAchvCountHtml.textContent = achvCounter
-        console.log("15th sale")
-    // Issues getting the below achv 100% of the time. If put at >= 2500,
-    // it keeps adding achvs. Any solutions? 
-    } else if (revenueCounter === 2500) {
-        achvCounter++
-        console.log("rev 2500")
-        liveAchvCountHtml.textContent = achvCounter
-    }
+function renderAchieveEmoji(emoji, arr) {
+    achieveArray.push(emoji)
+    let achieveDisplay = ''
+        for (let i = 0; i < arr.length; i++) {
+            achieveDisplay = arr[i]
+        }
+    achvCounter++
+    achvEmojiContainer.innerHTML += achieveDisplay
+    liveAchvCountHtml.innerText = achvCounter
 }
 
-// tally revenue
-function addRev(rev) {
+//Rendering the money within this function
+//provides the updated values
+//and smooths out some of the problems with the >= 2500 logic
+
+function renderMoneyStream(rev, comm) {
     revenueCounter += rev
     revenueHtml.textContent = `$${revenueCounter}`
-}
-
-// tally commission
-function addComm(comm) {
     commissionCounter += comm
     commissionHtml.textContent = `$${commissionCounter}`
+    renderMoneyEmojis(revenueCounter, commissionCounter)
+}
+
+//By creating achieveArray
+//we can check if it already includes the emojis
+//using the includes method
+//emojis no longer repeat with each click
+
+function renderMoneyEmojis(rev, comm) {
+    if (!achieveArray.includes('💰')) {
+        if (rev >= 2500) {
+            renderAchieveEmoji('💰', achieveArray)
+        }
+    }
+    if (!achieveArray.includes('🪙')) {
+        if (rev >= 5000) {
+            renderAchieveEmoji('🪙', achieveArray)
+        }
+    }
+    if (!achieveArray.includes('💵')) { //stretch goal: add new achievements
+        if (comm >= 500) {
+            renderAchieveEmoji('💵', achieveArray)
+        }
+    }
+    if (!achieveArray.includes('💸')) { //stretch goal: add new achievements
+        if (comm >= 1000) {
+            renderAchieveEmoji('💸', achieveArray)
+        }
+    }
+}
+
+//Stretch goal: reset data
+function reset() {
+    salesArray = []
+    achieveArray = []
+    salesCounter = 0
+    achvCounter = 0
+    revenueCounter = 0
+    commissionCounter = 0
+    salesEmojiContainer.innerHTML = ''
+    achvEmojiContainer.innerHTML = ''   
+    liveSalesCountHtml.textContent = 0
+    liveAchvCountHtml.textContent = 0
+    revenueHtml.textContent = `$0`
+    commissionHtml.textContent = `$0`
 }
 
 /****** EVENT LISTENERS ******/
 
 document.addEventListener("click", handleClick)
+
+document.getElementById('reset-btn').addEventListener("click", reset)
