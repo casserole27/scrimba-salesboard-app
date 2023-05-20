@@ -132,7 +132,7 @@ p {
 
 .totals-container {
     display: flex;
-    flex-direction: column;m
+    flex-direction: column;
     justify-content: center;
     width: 100%;
 }

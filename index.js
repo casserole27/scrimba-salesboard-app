@@ -22,13 +22,21 @@ const liveAchvCountHtml = document.getElementById("achv-counter")
 const achvEmojiContainer = document.getElementById("achv-emoji-container")
 const revenueHtml = document.getElementById("revenue")
 const commissionHtml = document.getElementById("commission")
-let salesCounter = 0
-let achvCounter = 0
-let revenueCounter = 0
-let commissionCounter = 0
+let storageObj = {
+    salesCounter: 0,
+    achvCounter: 0,
+    revenueCounter: 0,
+    commissionCounter: 0,
+    salesArray: [],
+    achieveArray: []
+}
+let salesCounter = storageObj.salesCounter
+let achvCounter = storageObj.achvCounter
+let revenueCounter = storageObj.revenueCounter
+let commissionCounter = storageObj.commissionCounter
 
-let salesArray = []
-let achieveArray = []
+let salesArray = storageObj.salesArray
+let achieveArray = storageObj.achieveArray
 
 /****** FUNCTIONS ******/
 
@@ -54,6 +62,8 @@ function render(prod) {
     } else if (salesArray.length === 30) { //stretch goal: add new achievements
         renderAchieveEmoji('🌠', achieveArray)
     }
+    // localStorage.setItem("salesArr", JSON.stringify(storageObj))
+    // console.log(JSON.parse(localStorage.getItem("salesArr")))
 }
 
 //Project requirements: use functions, arrays, and loops
@@ -63,9 +73,10 @@ function renderSalesEmoji(arr) {
         for (let i = 0; i < arr.length; i++) {
             salesDisplay = arr[i]
         }
-    salesCounter++
+    salesCounter + 1
     salesEmojiContainer.innerHTML += salesDisplay
     liveSalesCountHtml.innerText = salesCounter
+    console.log(storageObj)
 }
 
 function renderAchieveEmoji(emoji, arr) {
