@@ -22,13 +22,19 @@ const liveAchvCountHtml = document.getElementById("achv-counter")
 const achvEmojiContainer = document.getElementById("achv-emoji-container")
 const revenueHtml = document.getElementById("revenue")
 const commissionHtml = document.getElementById("commission")
-let salesCounter = 0
-let achvCounter = 0
-let revenueCounter = 0
-let commissionCounter = 0
+let storedData = JSON.parse(localStorage.getItem("salesboardData"))
 
-let salesArray = []
-let achieveArray = []
+let storageObj = storedData || {
+    salesArray: [],
+    achieveArray: [],
+    salesCounter: 0,
+    achvCounter: 0,
+    revenueCounter: 0,
+    commissionCounter: 0
+}
+
+let salesArray = storageObj.salesArray
+let achieveArray = storageObj.achieveArray
 
 /****** FUNCTIONS ******/
 
@@ -54,6 +60,7 @@ function render(prod) {
     } else if (salesArray.length === 30) { //stretch goal: add new achievements
         renderAchieveEmoji('🌠', achieveArray)
     }
+    updateLocalStorage()
 }
 
 //Project requirements: use functions, arrays, and loops
@@ -63,7 +70,8 @@ function renderSalesEmoji(arr) {
         for (let i = 0; i < arr.length; i++) {
             salesDisplay = arr[i]
         }
-    salesCounter++
+    storageObj.salesCounter++
+    let salesCounter = storageObj.salesCounter
     salesEmojiContainer.innerHTML += salesDisplay
     liveSalesCountHtml.innerText = salesCounter
 }
@@ -74,7 +82,8 @@ function renderAchieveEmoji(emoji, arr) {
         for (let i = 0; i < arr.length; i++) {
             achieveDisplay = arr[i]
         }
-    achvCounter++
+    storageObj.achvCounter++
+    let achvCounter = storageObj.achvCounter
     achvEmojiContainer.innerHTML += achieveDisplay
     liveAchvCountHtml.innerText = achvCounter
 }
@@ -84,9 +93,9 @@ function renderAchieveEmoji(emoji, arr) {
 //and smooths out some of the problems with the >= 2500 logic
 
 function renderMoneyStream(rev, comm) {
-    revenueCounter += rev
+    let revenueCounter = storageObj.revenueCounter += rev
     revenueHtml.textContent = `$${revenueCounter}`
-    commissionCounter += comm
+    let commissionCounter = storageObj.commissionCounter += comm
     commissionHtml.textContent = `$${commissionCounter}`
     renderMoneyEmojis(revenueCounter, commissionCounter)
 }
@@ -118,21 +127,25 @@ function renderMoneyEmojis(rev, comm) {
         }
     }
 }
-
 //Stretch goal: reset data
 function reset() {
-    salesArray = []
-    achieveArray = []
-    salesCounter = 0
-    achvCounter = 0
-    revenueCounter = 0
-    commissionCounter = 0
-    salesEmojiContainer.innerHTML = ''
-    achvEmojiContainer.innerHTML = ''   
-    liveSalesCountHtml.textContent = 0
-    liveAchvCountHtml.textContent = 0
-    revenueHtml.textContent = `$0`
-    commissionHtml.textContent = `$0`
+    localStorage.removeItem("salesboardData")
+    window.location.reload()
+}
+
+function renderStoredData() {
+    if (storageObj) {
+      salesEmojiContainer.innerHTML = storageObj.salesArray.join('')
+      achvEmojiContainer.innerHTML = storageObj.achieveArray.join('')
+      liveSalesCountHtml.innerText = storageObj.salesCounter
+      liveAchvCountHtml.innerText = storageObj.achvCounter
+      revenueHtml.textContent = `$${storageObj.revenueCounter}`
+      commissionHtml.textContent = `$${storageObj.commissionCounter}`
+    }
+  }
+
+function updateLocalStorage() {
+    localStorage.setItem("salesboardData", JSON.stringify(storageObj))
 }
 
 /****** EVENT LISTENERS ******/
@@ -140,3 +153,5 @@ function reset() {
 document.addEventListener("click", handleClick)
 
 document.getElementById('reset-btn').addEventListener("click", reset)
+
+renderStoredData()
