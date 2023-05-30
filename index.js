@@ -24,6 +24,7 @@ const revenueHtml = document.getElementById("revenue")
 const commissionHtml = document.getElementById("commission")
 let storedData = JSON.parse(localStorage.getItem("salesboardData"))
 
+
 let storageObj = storedData || {
     salesArray: [],
     achieveArray: [],
@@ -148,6 +149,8 @@ function updateLocalStorage() {
     localStorage.setItem("salesboardData", JSON.stringify(storageObj))
 }
 
+
+
 /****** EVENT LISTENERS ******/
 
 document.addEventListener("click", handleClick)
@@ -155,3 +158,52 @@ document.addEventListener("click", handleClick)
 document.getElementById('reset-btn').addEventListener("click", reset)
 
 renderStoredData()
+
+// let lightMode = JSON.parse(localStorage.getItem('lightmode'));
+const lightModeToggle = document.getElementById('lightmode-toggle');
+lightModeToggle.checked = false;
+
+console.log(lightModeToggle.checked)
+// console.log(lightMode);
+
+//check if light mode is enabled
+//if it's enabled, turn it off
+//if it's disabled, turn it on
+
+const enableLightMode = () => {
+
+    //1. add the class lightmode to the body
+    
+    document.body.classList.add('lightmode');
+    
+    //2. update darkMode in the localStorage
+    // localStorage.setItem('lightMode', 'enabled');
+}
+
+const disableLightMode = () => {
+    
+    // lightModeToggle.checked = false;
+    
+    //1. add the class lightmode to the body
+    document.body.classList.remove('lightmode');
+    
+    //2. update darkMode in the localStorage
+    // localStorage.setItem('lightMode', null);
+}
+
+lightModeToggle.addEventListener('click', () => {
+
+    // lightMode = localStorage.getItem('lightMode');
+
+    // if (lightMode !== 'enabled') {
+    if (document.body.classList.contains('lightmode')) {    
+        disableLightMode()
+        // console.log(lightMode)
+        // console.log(lightModeToggle.checked);
+    } else {
+        enableLightMode();
+        // console.log(lightMode)
+        // console.log(lightModeToggle.checked);
+    }
+});
+

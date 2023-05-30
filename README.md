@@ -86,9 +86,19 @@ Stretch goals:
 ### Continued development
 
 
+
+[Dark mode with media query / system preferences](https://www.youtube.com/watch?v=_yCgeXFAXTM)
+
+
 ### Useful resources
 
 [Scrimba help](https://different-marmoset-f7b.notion.site/Salesboard-3bb783fcb97548f281a45c8001f08a36)
+
+[Build Light/Dark Mode Toggle using checkbox](https://www.youtube.com/watch?v=S-T9XoCMwt4)
+
+[Light/Dark Mode JavaScript](https://www.youtube.com/watch?v=wodWDIdV9BY)
+  - class toggle
+  - local storage
 
 
 ## Author
@@ -96,8 +106,10 @@ Stretch goals:
 - Website - [C Lewis](https://www.clewisdev.com)
 - LinkedIn - [LinkedIn](https://www.linkedin.com/in/clewisdev/)
 
-
 ## Acknowledgments
+
+[YouTube: Red Stapler](https://www.youtube.com/@RedStapler_channel)
+[YouTube: Kevin Powell](https://www.youtube.com/@KevinPowell)
 
 
 

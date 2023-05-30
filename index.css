@@ -13,8 +13,12 @@ COLOR: #9E4770
 :root {
 
     /*COLORS*/
-  
-    
+    --bg: #201a23;
+    --field:#44354A;
+    --button:#9e4770;
+    --button-hover: #662845;
+    --text: #fff;
+
     /*BORDER RADIUS*/
     --br-soft: 1rem;
     --br-round: 50%;
@@ -27,7 +31,15 @@ COLOR: #9E4770
     --fs-title: 2.5rem;
 }
 
-/****** MARGIN AND PADDING RESET ******/
+.lightmode {
+    --bg:  #f4e1ff;
+    --field: #ceb2d8;
+    --button: #cc90ac;
+    --button-hover: #ce5f93;
+    --text: #555;
+}
+
+/*====== MARGIN AND PADDING RESET ======*/
 
 * {
     margin: 0;
@@ -35,65 +47,87 @@ COLOR: #9E4770
     box-sizing: border-box;
 }
 
-/******* GLOBAL STYLES *******/
+/*====== GLOBAL STYLES ======*/
+
 body {
     text-align: center;
     max-width: 950px;
     margin: 0 auto;
-    background: #201a23;
-    color: white;
+    background: var(--bg);
+    color: var(--text);
     font-family: 'Poppins', sans-serif;
-}
-
-.body-container {
-    width: 90%;
-    margin: 10px auto 0 auto;
 }
 
 img {
     max-width: 220px; 
-    border: 4px solid #44354A;
+    border: 4px solid var(--field);
     border-radius: 50%;
     margin-bottom: 1rem;
 }
+
+h2,
+p {
+    font-size: var(--fs-s);
+}
+
+p {
+    margin-left: 5px;
+}
+
 
 main {
     width: 100%;
 }
 
-.products-container {
-    margin-bottom: 1.25rem;
-}
-
 button {
     width: 80px;
     height: 40px;
-    background: #9e4770;
+    background: var(--button);
     border: none;
     border-radius: 6px;
     font-size: var(--fs-s);
 }
 
 button:hover {
-    background: #662845;
+    background: var(--button-hover);
     transform: scale(1.1);
     transition: all .5s ease;
 }
 
 /* putting focus state on button keeps style active if its clicked. */
 button:focus {
-    background: #662845;
+    background: var(--button-hover);
 }
 
 button:active {
-    background: #662845;
+    background: var(--button-hover);
     width: 180px;
     height: 70px;
+}
+
+.reset-btn {
+    width: 60%;
+    height: 50px;
+    font-family: inherit;
+    color: gold;
+    font-size: var(--fs-m);
+    letter-spacing: .2rem;   
 }
 
 
 .star-btn { 
     margin-right: .875rem;
+}
+
+/*====== LAYOUT ======*/
+
+.body-container {
+    width: 90%;
+    margin: 10px auto 0 auto;
+}
+
+.products-container {
+    margin-bottom: 1.25rem;
 }
 
 .sales-container,
@@ -111,17 +145,8 @@ button:active {
     justify-content: center;
 }
 
-h2,
-p {
-    font-size: var(--fs-s);
-}
-
-p {
-    margin-left: 5px;
-}
-
 .emoji-container {
-    background: #44354a;
+    background: var(--field);
     /* changed height to keep containers flexible to fit emojis */
     height: 100%;
     width: 100%;
@@ -145,28 +170,66 @@ p {
 .revenue,
 .commission {
     font-size: var(--fs-m);
-    background: #44354a;
+    background: var(--field);
     border-radius: 50px;
     width: 95%;
     margin-bottom: 2rem;
 }
 
-.reset-btn {
-    width: 60%;
-    height: 50px;
-    font-family: inherit;
-    color: gold;
-    font-size: var(--fs-m);
-    letter-spacing: .2rem;   
 
-    
+/*====== TOGGLE ======*/
+
+label {
+    width: 60px;
+    height: 30px;
+    position: relative;
+    display: block;
+    background-color: #44354a;
+    margin-left: auto;
+    margin-bottom: .5em;
+    border: 2px solid lightgray;
+    border-radius: 200px;
+    box-shadow: inset 0px 2px 5px black, inset 0px -2px 5px gray;
+    cursor: pointer;
+    transition: 0.3s;
 }
+
+label::after{
+    content: '';
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 3px;
+    left: 5px;
+    background: linear-gradient(180deg, #0173ff, #3a3a3a);
+    border-radius: 180px;
+    transition: 0.3s;
+}
+
+input {
+    width: 0;
+    height: 0;
+    visibility: hidden;
+}
+
+input:checked + label {
+    background: #fff;
+}
+
+input:checked + label:after {
+    left: 50px;
+    transform: translateX(-100%);
+    background: linear-gradient(180deg, #ffcc89, #d8860b);
+}
+
+
+/*====== MEDIA QUERIES ======*/
 
 @media screen and (min-width: 500px) {
 
     h1 { 
         font-size: 3rem;
-        margin-top: 2rem;
+        /* margin-top: 2rem; */
         margin-bottom: 1rem;
     }
 
@@ -211,3 +274,5 @@ p {
         margin-left: auto;
     }
 }
+
+
