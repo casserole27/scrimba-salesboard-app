@@ -6,7 +6,7 @@ let productA = {
     emoji: "⭐",
     revenue: 200,
     commission: 50
-}
+};
 
 // Product B info
 let productB = {
@@ -14,15 +14,15 @@ let productB = {
     emoji: "🔥",
     revenue: 300,
     commission: 75
-}
+};
 
-const liveSalesCountHtml = document.getElementById("sales-counter")
-const salesEmojiContainer = document.getElementById("sales-emoji-container")
-const liveAchvCountHtml = document.getElementById("achv-counter")
-const achvEmojiContainer = document.getElementById("achv-emoji-container")
-const revenueHtml = document.getElementById("revenue")
-const commissionHtml = document.getElementById("commission")
-let storedData = JSON.parse(localStorage.getItem("salesboardData"))
+const liveSalesCountHtml = document.getElementById("sales-counter");
+const salesEmojiContainer = document.getElementById("sales-emoji-container");
+const liveAchvCountHtml = document.getElementById("achv-counter");
+const achvEmojiContainer = document.getElementById("achv-emoji-container");
+const revenueHtml = document.getElementById("revenue");
+const commissionHtml = document.getElementById("commission");
+let storedData = JSON.parse(localStorage.getItem("salesboardData"));
 const lightModeToggle = document.getElementById('lightmode-toggle');
 lightModeToggle.checked = false;
 
@@ -35,10 +35,10 @@ let storageObj = storedData || {
     achvCounter: 0,
     revenueCounter: 0,
     commissionCounter: 0
-}
+};
 
-let salesArray = storageObj.salesArray
-let achieveArray = storageObj.achieveArray
+let salesArray = storageObj.salesArray;
+let achieveArray = storageObj.achieveArray;
 
 /****** FUNCTIONS ******/
 
@@ -46,63 +46,63 @@ let achieveArray = storageObj.achieveArray
 //My idea for dryer code: handle tasks in general render function
 function handleClick(e) {
     if (e.target.id === "star-btn") {
-        render(productA)
+        render(productA);
     } else if (e.target.id === "fire-btn") {
-        render(productB)
-    }
-}      
+        render(productB);
+    };
+}; 
 
 function render(prod) {
-    salesArray.push(prod.emoji)
-    renderSalesEmoji(salesArray)
-    renderMoneyStream(prod.revenue, prod.commission)
-    renderMoneyEmojis()
+    salesArray.push(prod.emoji);
+    renderSalesEmoji(salesArray);
+    renderMoneyStream(prod.revenue, prod.commission);
+    renderMoneyEmojis();
     if (salesArray.length === 1) {
-       renderAchieveEmoji('🔔', achieveArray)
+       renderAchieveEmoji('🔔', achieveArray);
     } else if (salesArray.length === 15) {
-        renderAchieveEmoji('🏆', achieveArray)
+        renderAchieveEmoji('🏆', achieveArray);
     } else if (salesArray.length === 30) { //stretch goal: add new achievements
-        renderAchieveEmoji('🌠', achieveArray)
+        renderAchieveEmoji('🌠', achieveArray);
     }
-    updateLocalStorage()
-}
+    updateLocalStorage();
+};
 
 //Project requirements: use functions, arrays, and loops
 
 function renderSalesEmoji(arr) {
-    let salesDisplay=''
+    let salesDisplay='';
         for (let i = 0; i < arr.length; i++) {
             salesDisplay = arr[i]
-        }
-    storageObj.salesCounter++
-    let salesCounter = storageObj.salesCounter
-    salesEmojiContainer.innerHTML += salesDisplay
-    liveSalesCountHtml.innerText = salesCounter
-}
+        };
+    storageObj.salesCounter++;
+    let salesCounter = storageObj.salesCounter;
+    salesEmojiContainer.innerHTML += salesDisplay;
+    liveSalesCountHtml.innerText = salesCounter;
+};
 
 function renderAchieveEmoji(emoji, arr) {
-    achieveArray.push(emoji)
-    let achieveDisplay = ''
+    achieveArray.push(emoji);
+    let achieveDisplay = '';
         for (let i = 0; i < arr.length; i++) {
             achieveDisplay = arr[i]
-        }
-    storageObj.achvCounter++
-    let achvCounter = storageObj.achvCounter
-    achvEmojiContainer.innerHTML += achieveDisplay
-    liveAchvCountHtml.innerText = achvCounter
-}
+        };
+    storageObj.achvCounter++;
+    let achvCounter = storageObj.achvCounter;
+    achvEmojiContainer.innerHTML += achieveDisplay;
+    liveAchvCountHtml.innerText = achvCounter;
+};
 
 //Rendering the money within this function
 //provides the updated values
 //and smooths out some of the problems with the >= 2500 logic
 
 function renderMoneyStream(rev, comm) {
-    let revenueCounter = storageObj.revenueCounter += rev
-    revenueHtml.textContent = `$${revenueCounter}`
-    let commissionCounter = storageObj.commissionCounter += comm
-    commissionHtml.textContent = `$${commissionCounter}`
-    renderMoneyEmojis(revenueCounter, commissionCounter)
-}
+    let revenueCounter = storageObj.revenueCounter += rev;
+    revenueHtml.textContent = `$${revenueCounter}`;
+    let commissionCounter = storageObj.commissionCounter += comm;
+    commissionHtml.textContent = `$${commissionCounter}`;
+    renderMoneyEmojis(revenueCounter, commissionCounter);
+};
 
 //By creating achieveArray
 //we can check if it already includes the emojis
@@ -112,40 +112,40 @@ function renderMoneyStream(rev, comm) {
 function renderMoneyEmojis(rev, comm) {
     if (!achieveArray.includes('💰')) {
         if (rev >= 2500) {
-            renderAchieveEmoji('💰', achieveArray)
-        }
-    }
+            renderAchieveEmoji('💰', achieveArray);
+        };
+    };
     if (!achieveArray.includes('🪙')) {
         if (rev >= 5000) {
-            renderAchieveEmoji('🪙', achieveArray)
-        }
-    }
+            renderAchieveEmoji('🪙', achieveArray);
+        };
+    };
     if (!achieveArray.includes('💵')) { //stretch goal: add new achievements
         if (comm >= 500) {
-            renderAchieveEmoji('💵', achieveArray)
-        }
-    }
+            renderAchieveEmoji('💵', achieveArray);
+        };
+    };
     if (!achieveArray.includes('💸')) { //stretch goal: add new achievements
         if (comm >= 1000) {
-            renderAchieveEmoji('💸', achieveArray)
-        }
-    }
-}
+            renderAchieveEmoji('💸', achieveArray);
+        };
+    };
+};
 
 // render data in storageObj
 function renderStoredData() {
     if (storageObj) {
-      salesEmojiContainer.innerHTML = storageObj.salesArray.join('')
-      achvEmojiContainer.innerHTML = storageObj.achieveArray.join('')
-      liveSalesCountHtml.innerText = storageObj.salesCounter
-      liveAchvCountHtml.innerText = storageObj.achvCounter
-      revenueHtml.textContent = `$${storageObj.revenueCounter}`
-      commissionHtml.textContent = `$${storageObj.commissionCounter}`
-    }
-  }
+      salesEmojiContainer.innerHTML = storageObj.salesArray.join('');
+      achvEmojiContainer.innerHTML = storageObj.achieveArray.join('');
+      liveSalesCountHtml.innerText = storageObj.salesCounter;
+      liveAchvCountHtml.innerText = storageObj.achvCounter;
+      revenueHtml.textContent = `$${storageObj.revenueCounter}`;
+      commissionHtml.textContent = `$${storageObj.commissionCounter}`;
+    };
+  };
 
 // updates local storage
-const updateLocalStorage = () => localStorage.setItem("salesboardData", JSON.stringify(storageObj))
+const updateLocalStorage = () => localStorage.setItem("salesboardData", JSON.stringify(storageObj));
 
 
 /****** LIGHT/DARK MODE TOGGLE ******/
@@ -173,29 +173,29 @@ function loadLightModeSetting () {
 
 //Stretch goal: reset data
 function reset() {
-    localStorage.removeItem("salesboardData")
-    localStorage.removeItem(lightModeKey)
-    window.location.reload()
+    localStorage.removeItem("salesboardData");
+    localStorage.removeItem(lightModeKey);
+    window.location.reload();
 }
 
 
 /****** EVENT LISTENERS ******/
 
-document.addEventListener("click", handleClick)
+document.addEventListener("click", handleClick);
 
-document.getElementById('reset-btn').addEventListener("click", reset)
+document.getElementById('reset-btn').addEventListener("click", reset);
 
 lightModeToggle.addEventListener('click', () => {
     if (document.body.classList.contains('lightmode')) {    
-        disableLightMode()
-        saveLightModeSetting(false)
+        disableLightMode();
+        saveLightModeSetting(false);
     } else {
         enableLightMode();
-        saveLightModeSetting(true)
-    }
+        saveLightModeSetting(true);
+    };
 });
 
-renderStoredData()
+renderStoredData();
 // Call the loadLightModeSetting function to load the initial light mode setting
 loadLightModeSetting();
 
