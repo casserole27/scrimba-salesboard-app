@@ -180,13 +180,12 @@ button:active {
 /*====== TOGGLE ======*/
 
 label {
-    width: 60px;
-    height: 30px;
+    width: 75px;
+    height: 35px;
     position: relative;
     display: block;
     background-color: #44354a;
-    margin-left: auto;
-    margin-bottom: .5em;
+    margin: 0 auto .5em auto;
     border: 2px solid lightgray;
     border-radius: 200px;
     box-shadow: inset 0px 2px 5px black, inset 0px -2px 5px gray;
@@ -196,8 +195,8 @@ label {
 
 label::after{
     content: '';
-    width: 20px;
-    height: 20px;
+    width: 25px;
+    height: 25px;
     position: absolute;
     top: 3px;
     left: 5px;
@@ -217,9 +216,30 @@ input:checked + label {
 }
 
 input:checked + label:after {
-    left: 50px;
+    left: 65px;
     transform: translateX(-100%);
     background: linear-gradient(180deg, #ffcc89, #d8860b);
+}
+
+.moon,
+.sun {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 5px;
+    z-index: 100;
+}
+
+.moon {
+    left: 7px;
+    fill: #7e7e7e;
+    transition: 0.3s;
+}
+
+.sun {
+    right: 7px;
+    fill: #fff;
+    transition: 0.3s;
 }
 
 
@@ -272,6 +292,10 @@ input:checked + label:after {
     
     .commission {
         margin-left: auto;
+    }
+
+    label {
+        margin: 0 0 .5em auto;
     }
 }
 
