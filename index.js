@@ -168,15 +168,15 @@ function loadLightModeSetting () {
   } else {
     disableLightMode();
     lightModeToggle.checked = false;
-  }
-}
+  };
+};
 
 //Stretch goal: reset data
 function reset() {
     localStorage.removeItem("salesboardData");
     localStorage.removeItem(lightModeKey);
     window.location.reload();
-}
+};
 
 
 /****** EVENT LISTENERS ******/
