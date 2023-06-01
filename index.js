@@ -23,6 +23,8 @@ const achvEmojiContainer = document.getElementById("achv-emoji-container")
 const revenueHtml = document.getElementById("revenue")
 const commissionHtml = document.getElementById("commission")
 let storedData = JSON.parse(localStorage.getItem("salesboardData"))
+const lightModeToggle = document.getElementById('lightmode-toggle');
+lightModeToggle.checked = false;
 
 // storageObj either equals to the stored data in local storage,
 // or to empty arrays/values if nothing is in storage
@@ -129,12 +131,6 @@ function renderMoneyEmojis(rev, comm) {
         }
     }
 }
-//Stretch goal: reset data
-function reset() {
-    localStorage.removeItem("salesboardData")
-    localStorage.removeItem(lightModeKey)
-    window.location.reload()
-}
 
 // render data in storageObj
 function renderStoredData() {
@@ -149,39 +145,22 @@ function renderStoredData() {
   }
 
 // updates local storage
-function updateLocalStorage() {
-    localStorage.setItem("salesboardData", JSON.stringify(storageObj))
-}
+const updateLocalStorage = () => localStorage.setItem("salesboardData", JSON.stringify(storageObj))
 
-/****** EVENT LISTENERS ******/
 
-document.addEventListener("click", handleClick)
+/****** LIGHT/DARK MODE TOGGLE ******/
 
-document.getElementById('reset-btn').addEventListener("click", reset)
+const enableLightMode = () => document.body.classList.add('lightmode');
 
-renderStoredData()
-
-const lightModeToggle = document.getElementById('lightmode-toggle');
-lightModeToggle.checked = false;
-
-const enableLightMode = () => {
-    document.body.classList.add('lightmode');
-}
-
-const disableLightMode = () => {
-    document.body.classList.remove('lightmode');
-}
+const disableLightMode = () => document.body.classList.remove('lightmode');
 
 // storage key for light mode
 const lightModeKey = "lightMode";
-
 // Function to save the light mode setting to local storage
-const saveLightModeSetting = (isLightMode) => {
-  localStorage.setItem(lightModeKey, isLightMode);
-}
+const saveLightModeSetting = (isLightMode) => localStorage.setItem(lightModeKey, isLightMode);
 
 // Function to load the light mode setting from local storage
-const loadLightModeSetting = () => {
+function loadLightModeSetting () {
   const isLightMode = localStorage.getItem(lightModeKey);
   if (isLightMode === "true") {
     enableLightMode();
@@ -191,6 +170,20 @@ const loadLightModeSetting = () => {
     lightModeToggle.checked = false;
   }
 }
+
+//Stretch goal: reset data
+function reset() {
+    localStorage.removeItem("salesboardData")
+    localStorage.removeItem(lightModeKey)
+    window.location.reload()
+}
+
+
+/****** EVENT LISTENERS ******/
+
+document.addEventListener("click", handleClick)
+
+document.getElementById('reset-btn').addEventListener("click", reset)
 
 lightModeToggle.addEventListener('click', () => {
     if (document.body.classList.contains('lightmode')) {    
@@ -202,6 +195,7 @@ lightModeToggle.addEventListener('click', () => {
     }
 });
 
+renderStoredData()
 // Call the loadLightModeSetting function to load the initial light mode setting
 loadLightModeSetting();
 
