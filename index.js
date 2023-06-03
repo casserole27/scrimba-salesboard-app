@@ -1,20 +1,7 @@
+import { productA, productB } from './data.js';
+import { lightModeToggle, loadLightModeSetting, renderLightMode } from './lightmode.js'
+
 /****** VARIABLES ******/
-
-// Product A info
-let productA = {
-    id: 1,
-    emoji: "⭐",
-    revenue: 200,
-    commission: 50
-};
-
-// Product B info
-let productB = {
-    id: 2,
-    emoji: "🔥",
-    revenue: 300,
-    commission: 75
-};
 
 const liveSalesCountHtml = document.getElementById("sales-counter");
 const salesEmojiContainer = document.getElementById("sales-emoji-container");
@@ -23,8 +10,6 @@ const achvEmojiContainer = document.getElementById("achv-emoji-container");
 const revenueHtml = document.getElementById("revenue");
 const commissionHtml = document.getElementById("commission");
 let storedData = JSON.parse(localStorage.getItem("salesboardData"));
-const lightModeToggle = document.getElementById('lightmode-toggle');
-lightModeToggle.checked = false;
 
 // storageObj either equals to the stored data in local storage,
 // or to empty arrays/values if nothing is in storage
@@ -39,6 +24,7 @@ let storageObj = storedData || {
 
 let salesArray = storageObj.salesArray;
 let achieveArray = storageObj.achieveArray;
+
 
 /****** FUNCTIONS ******/
 
@@ -63,9 +49,10 @@ function render(prod) {
         renderAchieveEmoji('🏆', achieveArray);
     } else if (salesArray.length === 30) { //stretch goal: add new achievements
         renderAchieveEmoji('🌠', achieveArray);
-    }
+    };
     updateLocalStorage();
 };
+
 
 //Project requirements: use functions, arrays, and loops
 
@@ -132,6 +119,8 @@ function renderMoneyEmojis(rev, comm) {
     };
 };
 
+
+
 // render data in storageObj
 function renderStoredData() {
     if (storageObj) {
@@ -146,30 +135,6 @@ function renderStoredData() {
 
 // updates local storage
 const updateLocalStorage = () => localStorage.setItem("salesboardData", JSON.stringify(storageObj));
-
-
-/****** LIGHT/DARK MODE TOGGLE ******/
-
-const enableLightMode = () => document.body.classList.add('lightmode');
-
-const disableLightMode = () => document.body.classList.remove('lightmode');
-
-// storage key for light mode
-const lightModeKey = "lightMode";
-// Function to save the light mode setting to local storage
-const saveLightModeSetting = (isLightMode) => localStorage.setItem(lightModeKey, isLightMode);
-
-// Function to load the light mode setting from local storage
-function loadLightModeSetting () {
-  const isLightMode = localStorage.getItem(lightModeKey);
-  if (isLightMode === "true") {
-    enableLightMode();
-    lightModeToggle.checked = true;
-  } else {
-    disableLightMode();
-    lightModeToggle.checked = false;
-  };
-};
 
 //Stretch goal: reset data
 function reset() {
@@ -186,16 +151,39 @@ document.addEventListener("click", handleClick);
 document.getElementById('reset-btn').addEventListener("click", reset);
 
 lightModeToggle.addEventListener('click', () => {
-    if (document.body.classList.contains('lightmode')) {    
-        disableLightMode();
-        saveLightModeSetting(false);
-    } else {
-        enableLightMode();
-        saveLightModeSetting(true);
-    };
+    renderLightMode()
 });
 
 renderStoredData();
 // Call the loadLightModeSetting function to load the initial light mode setting
 loadLightModeSetting();
 
+
+
+
+
+//! OLD LIGHT/DARK MODE CODE BEFORE REFACTOR
+
+/*
+// Function to load the light mode setting from local storage
+function loadLightModeSetting () {
+  const isLightMode = localStorage.getItem(lightModeKey);
+  if (isLightMode === "true") {
+    enableLightMode();
+    lightModeToggle.checked = true;
+  } else {
+    disableLightMode();
+    lightModeToggle.checked = false;
+  };
+};
+*/
+
+// lightModeToggle.addEventListener('click', () => {
+//     if (document.body.classList.contains('lightmode')) {    
+//         disableLightMode();
+//         saveLightModeSetting(false);
+//     } else {
+//         enableLightMode();
+//         saveLightModeSetting(true);
+//     };
+// });
