@@ -1,5 +1,5 @@
 import { productA, productB } from './data.js';
-import { lightModeToggle, loadLightModeSetting, renderLightMode } from './lightmode.js'
+import { lightModeKey, lightModeToggle, loadLightModeSetting, renderLightMode } from './lightmode.js'
 
 /****** VARIABLES ******/
 
@@ -31,11 +31,8 @@ let achieveArray = storageObj.achieveArray;
 //Project requirement: use objects, using provided objects
 //My idea for dryer code: handle tasks in general render function
 function handleClick(e) {
-    if (e.target.id === "star-btn") {
-        render(productA);
-    } else if (e.target.id === "fire-btn") {
-        render(productB);
-    };
+    e.target.id === "star-btn" ? render(productA) :
+    e.target.id === "fire-btn" ? render(productB): null;
 }; 
 
 function render(prod) {
@@ -43,13 +40,9 @@ function render(prod) {
     renderSalesEmoji(salesArray);
     renderMoneyStream(prod.revenue, prod.commission);
     renderMoneyEmojis();
-    if (salesArray.length === 1) {
-       renderAchieveEmoji('🔔', achieveArray);
-    } else if (salesArray.length === 15) {
-        renderAchieveEmoji('🏆', achieveArray);
-    } else if (salesArray.length === 30) { //stretch goal: add new achievements
-        renderAchieveEmoji('🌠', achieveArray);
-    };
+    salesArray.length === 1 ? renderAchieveEmoji('🔔', achieveArray) :
+    salesArray.length === 15 ? renderAchieveEmoji('🏆', achieveArray) :
+    salesArray.length === 30 ?  renderAchieveEmoji('🌠', achieveArray) : null; //stretch goal: add new achievements
     updateLocalStorage();
 };
 
@@ -97,29 +90,11 @@ function renderMoneyStream(rev, comm) {
 //emojis no longer repeat with each click
 
 function renderMoneyEmojis(rev, comm) {
-    if (!achieveArray.includes('💰')) {
-        if (rev >= 2500) {
-            renderAchieveEmoji('💰', achieveArray);
-        };
-    };
-    if (!achieveArray.includes('🪙')) {
-        if (rev >= 5000) {
-            renderAchieveEmoji('🪙', achieveArray);
-        };
-    };
-    if (!achieveArray.includes('💵')) { //stretch goal: add new achievements
-        if (comm >= 500) {
-            renderAchieveEmoji('💵', achieveArray);
-        };
-    };
-    if (!achieveArray.includes('💸')) { //stretch goal: add new achievements
-        if (comm >= 1000) {
-            renderAchieveEmoji('💸', achieveArray);
-        };
-    };
+    !achieveArray.includes('💰') && rev >= 2500 ? renderAchieveEmoji('💰', achieveArray) : null;
+    !achieveArray.includes('🪙') && rev >= 5000 ? renderAchieveEmoji('🪙', achieveArray) : null;
+    !achieveArray.includes('💵') && comm >= 500 ? renderAchieveEmoji('💵', achieveArray) : null; //stretch goal: add new achievements
+    !achieveArray.includes('💸') && comm >= 1000 ? renderAchieveEmoji('💸', achieveArray) : null; //stretch goal: add new achievements
 };
-
-
 
 // render data in storageObj
 function renderStoredData() {
@@ -131,7 +106,7 @@ function renderStoredData() {
       revenueHtml.textContent = `$${storageObj.revenueCounter}`;
       commissionHtml.textContent = `$${storageObj.commissionCounter}`;
     };
-  };
+};
 
 // updates local storage
 const updateLocalStorage = () => localStorage.setItem("salesboardData", JSON.stringify(storageObj));
@@ -150,9 +125,7 @@ document.addEventListener("click", handleClick);
 
 document.getElementById('reset-btn').addEventListener("click", reset);
 
-lightModeToggle.addEventListener('click', () => {
-    renderLightMode()
-});
+lightModeToggle.addEventListener('click', renderLightMode);
 
 renderStoredData();
 // Call the loadLightModeSetting function to load the initial light mode setting

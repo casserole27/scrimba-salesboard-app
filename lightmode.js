@@ -29,4 +29,4 @@ function renderLightMode() {
     };
 };
 
-export { lightModeToggle, loadLightModeSetting, renderLightMode };
+export { lightModeKey, lightModeToggle, loadLightModeSetting, renderLightMode };
