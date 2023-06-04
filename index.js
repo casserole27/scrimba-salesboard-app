@@ -1,20 +1,7 @@
+import { productA, productB } from './data.js';
+import { lightModeKey, lightModeToggle, loadLightModeSetting, renderLightMode } from './lightmode.js'
+
 /****** VARIABLES ******/
-
-// Product A info
-let productA = {
-    id: 1,
-    emoji: "⭐",
-    revenue: 200,
-    commission: 50
-};
-
-// Product B info
-let productB = {
-    id: 2,
-    emoji: "🔥",
-    revenue: 300,
-    commission: 75
-};
 
 const liveSalesCountHtml = document.getElementById("sales-counter");
 const salesEmojiContainer = document.getElementById("sales-emoji-container");
@@ -23,8 +10,6 @@ const achvEmojiContainer = document.getElementById("achv-emoji-container");
 const revenueHtml = document.getElementById("revenue");
 const commissionHtml = document.getElementById("commission");
 let storedData = JSON.parse(localStorage.getItem("salesboardData"));
-const lightModeToggle = document.getElementById('lightmode-toggle');
-lightModeToggle.checked = false;
 
 // storageObj either equals to the stored data in local storage,
 // or to empty arrays/values if nothing is in storage
@@ -40,16 +25,14 @@ let storageObj = storedData || {
 let salesArray = storageObj.salesArray;
 let achieveArray = storageObj.achieveArray;
 
+
 /****** FUNCTIONS ******/
 
 //Project requirement: use objects, using provided objects
 //My idea for dryer code: handle tasks in general render function
 function handleClick(e) {
-    if (e.target.id === "star-btn") {
-        render(productA);
-    } else if (e.target.id === "fire-btn") {
-        render(productB);
-    };
+    e.target.id === "star-btn" ? render(productA) :
+    e.target.id === "fire-btn" ? render(productB): null;
 }; 
 
 function render(prod) {
@@ -57,15 +40,12 @@ function render(prod) {
     renderSalesEmoji(salesArray);
     renderMoneyStream(prod.revenue, prod.commission);
     renderMoneyEmojis();
-    if (salesArray.length === 1) {
-       renderAchieveEmoji('🔔', achieveArray);
-    } else if (salesArray.length === 15) {
-        renderAchieveEmoji('🏆', achieveArray);
-    } else if (salesArray.length === 30) { //stretch goal: add new achievements
-        renderAchieveEmoji('🌠', achieveArray);
-    }
+    salesArray.length === 1 ? renderAchieveEmoji('🔔', achieveArray) :
+    salesArray.length === 15 ? renderAchieveEmoji('🏆', achieveArray) :
+    salesArray.length === 30 ?  renderAchieveEmoji('🌠', achieveArray) : null; //stretch goal: add new achievements
     updateLocalStorage();
 };
+
 
 //Project requirements: use functions, arrays, and loops
 
@@ -110,26 +90,10 @@ function renderMoneyStream(rev, comm) {
 //emojis no longer repeat with each click
 
 function renderMoneyEmojis(rev, comm) {
-    if (!achieveArray.includes('💰')) {
-        if (rev >= 2500) {
-            renderAchieveEmoji('💰', achieveArray);
-        };
-    };
-    if (!achieveArray.includes('🪙')) {
-        if (rev >= 5000) {
-            renderAchieveEmoji('🪙', achieveArray);
-        };
-    };
-    if (!achieveArray.includes('💵')) { //stretch goal: add new achievements
-        if (comm >= 500) {
-            renderAchieveEmoji('💵', achieveArray);
-        };
-    };
-    if (!achieveArray.includes('💸')) { //stretch goal: add new achievements
-        if (comm >= 1000) {
-            renderAchieveEmoji('💸', achieveArray);
-        };
-    };
+    !achieveArray.includes('💰') && rev >= 2500 ? renderAchieveEmoji('💰', achieveArray) : null;
+    !achieveArray.includes('🪙') && rev >= 5000 ? renderAchieveEmoji('🪙', achieveArray) : null;
+    !achieveArray.includes('💵') && comm >= 500 ? renderAchieveEmoji('💵', achieveArray) : null; //stretch goal: add new achievements
+    !achieveArray.includes('💸') && comm >= 1000 ? renderAchieveEmoji('💸', achieveArray) : null; //stretch goal: add new achievements
 };
 
 // render data in storageObj
@@ -142,34 +106,10 @@ function renderStoredData() {
       revenueHtml.textContent = `$${storageObj.revenueCounter}`;
       commissionHtml.textContent = `$${storageObj.commissionCounter}`;
     };
-  };
+};
 
 // updates local storage
 const updateLocalStorage = () => localStorage.setItem("salesboardData", JSON.stringify(storageObj));
-
-
-/****** LIGHT/DARK MODE TOGGLE ******/
-
-const enableLightMode = () => document.body.classList.add('lightmode');
-
-const disableLightMode = () => document.body.classList.remove('lightmode');
-
-// storage key for light mode
-const lightModeKey = "lightMode";
-// Function to save the light mode setting to local storage
-const saveLightModeSetting = (isLightMode) => localStorage.setItem(lightModeKey, isLightMode);
-
-// Function to load the light mode setting from local storage
-function loadLightModeSetting () {
-  const isLightMode = localStorage.getItem(lightModeKey);
-  if (isLightMode === "true") {
-    enableLightMode();
-    lightModeToggle.checked = true;
-  } else {
-    disableLightMode();
-    lightModeToggle.checked = false;
-  };
-};
 
 //Stretch goal: reset data
 function reset() {
@@ -185,17 +125,38 @@ document.addEventListener("click", handleClick);
 
 document.getElementById('reset-btn').addEventListener("click", reset);
 
-lightModeToggle.addEventListener('click', () => {
-    if (document.body.classList.contains('lightmode')) {    
-        disableLightMode();
-        saveLightModeSetting(false);
-    } else {
-        enableLightMode();
-        saveLightModeSetting(true);
-    };
-});
+lightModeToggle.addEventListener('click', renderLightMode);
 
 renderStoredData();
 // Call the loadLightModeSetting function to load the initial light mode setting
 loadLightModeSetting();
 
+
+
+
+
+//! OLD LIGHT/DARK MODE CODE BEFORE REFACTOR
+
+/*
+// Function to load the light mode setting from local storage
+function loadLightModeSetting () {
+  const isLightMode = localStorage.getItem(lightModeKey);
+  if (isLightMode === "true") {
+    enableLightMode();
+    lightModeToggle.checked = true;
+  } else {
+    disableLightMode();
+    lightModeToggle.checked = false;
+  };
+};
+*/
+
+// lightModeToggle.addEventListener('click', () => {
+//     if (document.body.classList.contains('lightmode')) {    
+//         disableLightMode();
+//         saveLightModeSetting(false);
+//     } else {
+//         enableLightMode();
+//         saveLightModeSetting(true);
+//     };
+// });
