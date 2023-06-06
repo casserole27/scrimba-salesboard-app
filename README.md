@@ -72,7 +72,7 @@ Stretch goals:
 
 ### Links
 
-- [Scrim](#)
+- [Scrim](https://scrimba.com/scrim/co07b41a59b051033bcf6d1a8)
 - [Github](https://github.com/casserole27/scrimba-salesboard-app)
 - [Live Site](https://www.clewisdev.com/scrimba-salesboard-app/)
 

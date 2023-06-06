@@ -1,3 +1,5 @@
+/* Author: Gabe Davila and Cassie Lewis */
+
 import { productA, productB } from './data.js';
 import { lightModeKey, lightModeToggle, loadLightModeSetting, renderLightMode } from './lightmode.js'
 
