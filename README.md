@@ -137,6 +137,8 @@ document.getElementById('lightmode-label').addEventListener('keypress', e => {
   - class toggle
   - local storage
 
+- [Trigger button click on enter](https://www.w3schools.com/howto/howto_js_trigger_button_enter.asp)
+
 ## Author
 
 - Gabe Davila
