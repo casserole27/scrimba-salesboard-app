@@ -141,7 +141,9 @@ document.getElementById('lightmode-label').addEventListener('keypress', e => {
 
 ## Author
 
-- Gabe Davila
+- Gabriel Davila
+  - Portfolio - [Github](https://github.com/GabrielJDavila)
+  - LinkedIn - [LinkedIn](https://www.linkedin.com/in/gabrieljdavila/)
 
 - Cassie Lewis
   - Website - [C Lewis](https://www.clewisdev.com)
