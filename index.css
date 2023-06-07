@@ -1,12 +1,4 @@
-/*
-COLOR PALETTE
-
-BLACK: #201A23
-WHITE: #FBFBFB
-DARK: #44354A
-COLOR: #9E4770
-*/
-
+/* Author: Gabe Davila and Cassie Lewis */
 
 /****** VARIABLES ******/
 
@@ -18,6 +10,7 @@ COLOR: #9E4770
     --button:#9e4770;
     --button-hover: #662845;
     --text: #fff;
+    --button-text: gold;
 
     /*BORDER RADIUS*/
     --br-soft: 1rem;
@@ -37,6 +30,7 @@ COLOR: #9E4770
     --button: #cc90ac;
     --button-hover: #ce5f93;
     --text: #555;
+    --button-text: #00366B;
 }
 
 /*====== MARGIN AND PADDING RESET ======*/
@@ -109,7 +103,7 @@ button:active {
     width: 60%;
     height: 50px;
     font-family: inherit;
-    color: gold;
+    color: var(--button-text);
     font-size: var(--fs-m);
     letter-spacing: .2rem;   
 }
@@ -178,6 +172,7 @@ button:active {
 
 
 /*====== TOGGLE ======*/
+/* Cassie */
 
 label {
     width: 75px;
@@ -208,14 +203,14 @@ label::after{
 input {
     width: 0;
     height: 0;
-    visibility: hidden;
-}
+    visibility: hidden;          
+}   
 
 input:checked + label {
     background: #fff;
 }
 
-input:checked + label:after {
+input:checked + label:after {   
     left: 65px;
     transform: translateX(-100%);
     background: linear-gradient(180deg, #ffcc89, #d8860b);

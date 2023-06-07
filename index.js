@@ -1,3 +1,5 @@
+/* Author: Gabe Davila and Cassie Lewis */
+
 import { productA, productB } from './data.js';
 import { lightModeKey, lightModeToggle, loadLightModeSetting, renderLightMode } from './lightmode.js'
 
@@ -126,6 +128,12 @@ document.addEventListener("click", handleClick);
 document.getElementById('reset-btn').addEventListener("click", reset);
 
 lightModeToggle.addEventListener('click', renderLightMode);
+//add toggle to keyboard focus
+document.getElementById('lightmode-label').addEventListener('keypress', e => {
+    if(e.key === "Enter") {
+        renderLightMode()
+    };
+});
 
 renderStoredData();
 // Call the loadLightModeSetting function to load the initial light mode setting
@@ -135,28 +143,3 @@ loadLightModeSetting();
 
 
 
-//! OLD LIGHT/DARK MODE CODE BEFORE REFACTOR
-
-/*
-// Function to load the light mode setting from local storage
-function loadLightModeSetting () {
-  const isLightMode = localStorage.getItem(lightModeKey);
-  if (isLightMode === "true") {
-    enableLightMode();
-    lightModeToggle.checked = true;
-  } else {
-    disableLightMode();
-    lightModeToggle.checked = false;
-  };
-};
-*/
-
-// lightModeToggle.addEventListener('click', () => {
-//     if (document.body.classList.contains('lightmode')) {    
-//         disableLightMode();
-//         saveLightModeSetting(false);
-//     } else {
-//         enableLightMode();
-//         saveLightModeSetting(true);
-//     };
-// });

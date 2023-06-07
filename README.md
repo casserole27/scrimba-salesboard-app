@@ -54,13 +54,27 @@ Stretch goals:
 
 ### Screenshot
 
-![screenshot](#)
+<h2>Desktop - dark mode</h2>
+
+![screenshot](images/screenshots/salesboard-dark-desktop.png)
+
+<h2>Desktop - light mode</h2>
+
+![screenshot](images/screenshots/salesboard-light-desktop.png)
+
+<h2>Mobile - dark mode</h2>
+
+![screenshot](images/screenshots/salesboard-dark-mobile.png)
+
+<h2>Mobile - light mode</h2>
+
+![screenshot](images/screenshots/salesboard-light-mobile.png)
 
 ### Links
 
-[Scrim](#)s
-[Github](#)
-[Live Site](#)
+- [Scrim](https://scrimba.com/scrim/co07b41a59b051033bcf6d1a8)
+- [Github](https://github.com/casserole27/scrimba-salesboard-app)
+- [Live Site](https://www.clewisdev.com/scrimba-salesboard-app/)
 
 ## My process
 
@@ -78,33 +92,62 @@ Stretch goals:
 
 ### Built with
 
+- semantic HTML5
 - CSS custom properties
 - Responsive Web Design
+- vanilla JavaScript
+  - modules
+  - local storage
 
 ### What I learned
 
+- creating a toggle from scratch requires a lot of code!
+- attempted keyboard focus for light/dark toggle 
+
+```html
+        <!--? added keyboard focus, but this is not an interactive element?-->
+            <label 
+                for="lightmode-toggle" 
+                aria-label="light and dark mode toggle"
+                tabindex="0"
+                id="lightmode-label">
+```
+
+```javascript
+//add toggle to keyboard focus
+document.getElementById('lightmode-label').addEventListener('keypress', e => {
+    if(e.key === "Enter") {
+        renderLightMode()
+    };
+});
+```
+
 ### Continued development
 
-
-
-[Dark mode with media query / system preferences](https://www.youtube.com/watch?v=_yCgeXFAXTM)
+- [Dark mode with media query / system preferences](https://www.youtube.com/watch?v=_yCgeXFAXTM)
 
 
 ### Useful resources
 
-[Scrimba help](https://different-marmoset-f7b.notion.site/Salesboard-3bb783fcb97548f281a45c8001f08a36)
+- [Scrimba help](https://different-marmoset-f7b.notion.site/Salesboard-3bb783fcb97548f281a45c8001f08a36)
 
-[Build Light/Dark Mode Toggle using checkbox](https://www.youtube.com/watch?v=S-T9XoCMwt4)
+- [Build Light/Dark Mode Toggle using checkbox](https://www.youtube.com/watch?v=S-T9XoCMwt4)
 
-[Light/Dark Mode JavaScript](https://www.youtube.com/watch?v=wodWDIdV9BY)
+- [Light/Dark Mode JavaScript](https://www.youtube.com/watch?v=wodWDIdV9BY)
   - class toggle
   - local storage
 
+- [Trigger button click on enter](https://www.w3schools.com/howto/howto_js_trigger_button_enter.asp)
 
 ## Author
 
-- Website - [C Lewis](https://www.clewisdev.com)
-- LinkedIn - [LinkedIn](https://www.linkedin.com/in/clewisdev/)
+- Gabriel Davila
+  - Portfolio - [Github](https://github.com/GabrielJDavila)
+  - LinkedIn - [LinkedIn](https://www.linkedin.com/in/gabrieljdavila/)
+
+- Cassie Lewis
+  - Website - [C Lewis](https://www.clewisdev.com)
+  - LinkedIn - [LinkedIn](https://www.linkedin.com/in/clewisdev/)
 
 ## Acknowledgments
 
